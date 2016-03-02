@@ -16,7 +16,7 @@ import edu.towson.cis.cosc603.project2.monopoly.Player;
 
 public class BuyHouseDialog extends JDialog {
 	/**
-	 * 
+	 * this class buys a house
 	 */
 	private static final long serialVersionUID = 1L;
 	private JComboBox<?> cboMonopoly;
