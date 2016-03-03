@@ -24,6 +24,7 @@ public class CardCell extends Cell {
      * @see edu.towson.cis.cosc442.project1.monopoly.Cell#playAction()
      */
     public boolean playAction(String msg) {
+		return false;
     }
     
     /**

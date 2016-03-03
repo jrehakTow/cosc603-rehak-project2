@@ -60,5 +60,6 @@ public class RailRoadCell extends Cell {
 				currentPlayer.payRentTo(theOwner, getRent());
 			}
 		}
+		return false;
 	}
 }
