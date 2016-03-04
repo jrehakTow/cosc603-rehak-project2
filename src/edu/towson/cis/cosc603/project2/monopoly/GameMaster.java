@@ -10,14 +10,13 @@ import java.util.Iterator;
  */
 public class GameMaster {
 
+	private DiceRoll diceRoll = new DiceRoll();
+
 	/** The game master. */
 	private static GameMaster gameMaster;
 	
 	/** The Constant MAX_PLAYER. */
 	static final public int MAX_PLAYER = 8;	
-	
-	/** The dice. */
-	private Die[] dice;
 	
 	/** The game board. */
 	private GameBoard gameBoard;
@@ -37,9 +36,6 @@ public class GameMaster {
 	/** The util dice roll. */
 	private int utilDiceRoll;
 	
-	/** The test mode. */
-	private boolean testMode;
-
 	/**
 	 * Instance.
 	 *
@@ -57,7 +53,7 @@ public class GameMaster {
 	 */
 	public GameMaster() {
 		initAmountOfMoney = 1500;
-		dice = new Die[]{new Die(), new Die()};
+		diceRoll.setDice(new Die[] { new Die(), new Die() });
 	}
 
     /**
@@ -133,7 +129,7 @@ public class GameMaster {
      * Btn roll dice clicked.
      */
     public void btnRollDiceClicked() {
-		int[] rolls = rollDice();
+		int[] rolls = diceRoll.rollDice(gui);
 		if((rolls[0]+rolls[1]) > 0) {
 			Player player = getCurrentPlayer();
 			gui.setRollDiceEnabled(false);
@@ -358,15 +354,7 @@ public class GameMaster {
 	 * @return the int[]
 	 */
 	public int[] rollDice() {
-		if(testMode) {
-			return gui.getDiceRoll();
-		}
-		else {
-			return new int[]{
-					dice[0].getRoll(),
-					dice[1].getRoll()
-			};
-		}
+		return diceRoll.rollDice(gui);
 	}
 	
 	/**
@@ -487,7 +475,7 @@ public class GameMaster {
 	 * @param b the new test mode
 	 */
 	public void setTestMode(boolean b) {
-		testMode = b;
+		diceRoll.setTestMode(b);
 	}
 
 	/**
