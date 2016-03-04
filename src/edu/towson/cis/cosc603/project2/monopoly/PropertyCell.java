@@ -6,6 +6,8 @@ package edu.towson.cis.cosc603.project2.monopoly;
  */
 public class PropertyCell extends Cell {
 	
+	private PropertyRent propertyRent = new PropertyRent();
+
 	/** The color group. */
 	private String colorGroup;
 	
@@ -14,9 +16,6 @@ public class PropertyCell extends Cell {
 	
 	/** The num houses. */
 	private int numHouses;
-	
-	/** The rent. */
-	private int rent;
 	
 	/** The sell price. */
 	private int sellPrice;
@@ -61,29 +60,7 @@ public class PropertyCell extends Cell {
 	 * @return the rent
 	 */
 	public int getRent() {
-		int rentToCharge = rent;
-		String [] monopolies = theOwner.getMonopolies();
-		rentToCharge = calculateMonopoliesRent(rentToCharge, monopolies);
-		if(numHouses > 0) {
-			rentToCharge = rent * (numHouses + 1);
-		}
-		return rentToCharge;
-	}
-
-	/**
-	 * Calculate monopolies rent.
-	 *
-	 * @param rentToCharge the rent to charge
-	 * @param monopolies the monopolies
-	 * @return the int
-	 */
-	private int calculateMonopoliesRent(int rentToCharge, String[] monopolies) {
-		for(int i = 0; i < monopolies.length; i++) {
-			if(monopolies[i].equals(colorGroup)) {
-				rentToCharge = rent * 2;
-			}
-		}
-		return rentToCharge;
+		return propertyRent.getRent(numHouses, theOwner, colorGroup);
 	}
 
 	/* (non-Javadoc)
@@ -94,7 +71,7 @@ public class PropertyCell extends Cell {
 		if(!isAvailable()) {
 			currentPlayer = GameMaster.instance().getCurrentPlayer();
 			if(theOwner != currentPlayer) {
-				currentPlayer.payRentTo(theOwner, getRent());
+				currentPlayer.payRentTo(theOwner, propertyRent.getRent(numHouses, theOwner, colorGroup));
 			}
 		}
 		return false;
@@ -142,6 +119,6 @@ public class PropertyCell extends Cell {
 	 * @param rent the new rent
 	 */
 	public void setRent(int rent) {
-		this.rent = rent;
+		propertyRent.setRent(rent);
 	}
 }
