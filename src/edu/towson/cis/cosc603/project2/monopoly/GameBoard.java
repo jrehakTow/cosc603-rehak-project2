@@ -233,12 +233,5 @@ public class GameBoard {
 		}
 		else
 			return null;
-		/*
-		switch (type) {
-		case Card.TYPE_CC:
-			return new TypeCc();
-		}
-		return null;
-		*/
 	}
 }
