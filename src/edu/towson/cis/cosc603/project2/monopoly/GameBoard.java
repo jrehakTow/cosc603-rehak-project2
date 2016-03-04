@@ -222,14 +222,23 @@ public class GameBoard {
 		gui.setDrawCardEnabled(false);
 		CardCell cell = (CardCell) gameMaster.getCurrentPlayer().getPosition();
 		Card card = null;
-		if (cell.getType() == Card.TYPE_CC) {
-			card = drawCCCard();
-			card.applyAction();
-		} else {
-			card = drawChanceCard();
-			card.applyAction();
-		}
+		card = getTypeObject(cell.getType()).btnDrawCardClicked(card, this);
 		gui.setEndTurnEnabled(true);
 		return card;
+	}
+
+	private Type getTypeObject(int type) {
+		if(type == Card.TYPE_CC){
+			return new TypeCc();
+		}
+		else
+			return null;
+		/*
+		switch (type) {
+		case Card.TYPE_CC:
+			return new TypeCc();
+		}
+		return null;
+		*/
 	}
 }
