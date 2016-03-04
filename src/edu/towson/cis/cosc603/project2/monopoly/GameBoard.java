@@ -233,5 +233,7 @@ public class GameBoard {
 		}
 		else
 			return null;
+		//corrected refactoring mistake
+
 	}
 }
